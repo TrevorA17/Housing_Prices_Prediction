@@ -45,3 +45,18 @@ boot_results <- boot(housing_data, statistic_function, R = 1000)
 # Display bootstrapped statistics
 print("Bootstrapped Statistics:")
 print(boot_results)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Define number of folds
+k <- 10
+
+# Perform K-fold cross-validation
+cv_results <- trainControl(method = "cv", number = k)
+
+# Define the model (e.g., linear regression)
+model <- train(price ~ ., data = housing_data, method = "lm", trControl = cv_results)
+
+# Display cross-validation results
+print(model)

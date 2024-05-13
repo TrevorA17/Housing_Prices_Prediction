@@ -60,3 +60,20 @@ model <- train(price ~ ., data = housing_data, method = "lm", trControl = cv_res
 
 # Display cross-validation results
 print(model)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Define training control with repeated cross-validation
+train_control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+# Define models to train
+models <- c("lm", "gbm", "knn")
+
+# Train models
+results <- lapply(models, function(model) {
+  train(price ~ ., data = housing_data, method = model, trControl = train_control)
+})
+
+# Display results
+print(results)

@@ -135,3 +135,49 @@ correlation_matrix <- cor(housing_data[c("price", "area", "bedrooms", "bathrooms
 # Display correlation matrix
 print("Correlation Matrix:")
 print(correlation_matrix)
+
+# Perform ANOVA
+anova_result <- aov(price ~ furnishingstatus, data = housing_data)
+
+# Summarize ANOVA results
+summary(anova_result)
+
+# Load necessary library
+library(ggplot2)
+
+# Histogram for price
+ggplot(housing_data, aes(x = price)) +
+  geom_histogram(binwidth = 100000, fill = "blue", color = "black") +
+  labs(title = "Distribution of Price", x = "Price", y = "Frequency") +
+  theme_minimal()
+
+# Boxplot for area
+ggplot(housing_data, aes(x = "", y = area)) +
+  geom_boxplot(fill = "green", color = "black") +
+  labs(title = "Distribution of Area", x = "", y = "Area") +
+  theme_minimal()
+
+# Barplot for bedrooms
+ggplot(housing_data, aes(x = as.factor(bedrooms))) +
+  geom_bar(fill = "orange", color = "black") +
+  labs(title = "Number of Bedrooms", x = "Bedrooms", y = "Frequency") +
+  theme_minimal()
+
+# Boxplot for bathrooms
+ggplot(housing_data, aes(x = "", y = bathrooms)) +
+  geom_boxplot(fill = "purple", color = "black") +
+  labs(title = "Distribution of Bathrooms", x = "", y = "Bathrooms") +
+  theme_minimal()
+
+# Histogram for stories
+ggplot(housing_data, aes(x = as.factor(stories))) +
+  geom_bar(fill = "pink", color = "black") +
+  labs(title = "Number of Stories", x = "Stories", y = "Frequency") +
+  theme_minimal()
+
+# Boxplot for parking
+ggplot(housing_data, aes(x = "", y = parking)) +
+  geom_boxplot(fill = "yellow", color = "black") +
+  labs(title = "Distribution of Parking", x = "", y = "Parking") +
+  theme_minimal()
+

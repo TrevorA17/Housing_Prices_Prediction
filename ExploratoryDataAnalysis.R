@@ -181,3 +181,20 @@ ggplot(housing_data, aes(x = "", y = parking)) +
   labs(title = "Distribution of Parking", x = "", y = "Parking") +
   theme_minimal()
 
+# Scatter plot: price vs. area
+ggplot(housing_data, aes(x = area, y = price)) +
+  geom_point(color = "blue") +
+  labs(title = "Price vs. Area", x = "Area", y = "Price") +
+  theme_minimal()
+
+# Pair plot for numerical variables
+pair_data <- housing_data[, c("price", "area", "bedrooms", "bathrooms", "stories", "parking")]
+pairs(pair_data)
+
+# Heatmap for correlation matrix
+correlation_matrix <- cor(housing_data[c("price", "area", "bedrooms", "bathrooms", "stories", "parking")])
+ggplot(data = melt(correlation_matrix), aes(x = Var1, y = Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "blue") +
+  labs(title = "Correlation Heatmap", x = "", y = "") +
+  theme_minimal()

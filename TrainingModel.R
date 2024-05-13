@@ -77,3 +77,9 @@ results <- lapply(models, function(model) {
 
 # Display results
 print(results)
+
+# Compare model performance using resamples
+resampled_results <- resamples(results)
+
+# Display summary of model performance
+summary(resampled_results)

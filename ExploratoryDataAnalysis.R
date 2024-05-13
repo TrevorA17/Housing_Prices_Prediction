@@ -129,3 +129,9 @@ print(paste("Bathrooms Standard Deviation:", std_dev_bathrooms))
 print(paste("Stories Standard Deviation:", std_dev_stories))
 print(paste("Parking Standard Deviation:", std_dev_parking))
 
+# Compute correlation coefficients
+correlation_matrix <- cor(housing_data[c("price", "area", "bedrooms", "bathrooms", "stories", "parking")])
+
+# Display correlation matrix
+print("Correlation Matrix:")
+print(correlation_matrix)

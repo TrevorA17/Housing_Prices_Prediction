@@ -1,5 +1,6 @@
 # Load necessary libraries
 library(caret)
+library(boot)
 
 # Load dataset
 housing_data <- read.csv("data/Housing.csv", colClasses = c(
@@ -32,3 +33,15 @@ print(dim(training_data))
 print("Dimensions of Testing Set:")
 print(dim(testing_data))
 
+# Define function to compute statistic of interest (e.g., mean of price)
+statistic_function <- function(data, indices) {
+  sample_data <- data[indices, ]
+  return(mean(sample_data$price))
+}
+
+# Perform bootstrapping
+boot_results <- boot(housing_data, statistic_function, R = 1000)
+
+# Display bootstrapped statistics
+print("Bootstrapped Statistics:")
+print(boot_results)

@@ -84,3 +84,48 @@ print(paste("Median Stories:", median_stories))
 print(paste("Mean Parking:", mean_parking))
 print(paste("Median Parking:", median_parking))
 
+# Measures of distribution for numerical variables
+range_price <- range(housing_data$price)
+range_area <- range(housing_data$area)
+range_bedrooms <- range(housing_data$bedrooms)
+range_bathrooms <- range(housing_data$bathrooms)
+range_stories <- range(housing_data$stories)
+range_parking <- range(housing_data$parking)
+
+variance_price <- var(housing_data$price)
+variance_area <- var(housing_data$area)
+variance_bedrooms <- var(housing_data$bedrooms)
+variance_bathrooms <- var(housing_data$bathrooms)
+variance_stories <- var(housing_data$stories)
+variance_parking <- var(housing_data$parking)
+
+std_dev_price <- sd(housing_data$price)
+std_dev_area <- sd(housing_data$area)
+std_dev_bedrooms <- sd(housing_data$bedrooms)
+std_dev_bathrooms <- sd(housing_data$bathrooms)
+std_dev_stories <- sd(housing_data$stories)
+std_dev_parking <- sd(housing_data$parking)
+
+# Display measures of distribution
+print("Measures of Distribution:")
+print(paste("Price Range:", range_price))
+print(paste("Area Range:", range_area))
+print(paste("Bedrooms Range:", range_bedrooms))
+print(paste("Bathrooms Range:", range_bathrooms))
+print(paste("Stories Range:", range_stories))
+print(paste("Parking Range:", range_parking))
+
+print(paste("Price Variance:", variance_price))
+print(paste("Area Variance:", variance_area))
+print(paste("Bedrooms Variance:", variance_bedrooms))
+print(paste("Bathrooms Variance:", variance_bathrooms))
+print(paste("Stories Variance:", variance_stories))
+print(paste("Parking Variance:", variance_parking))
+
+print(paste("Price Standard Deviation:", std_dev_price))
+print(paste("Area Standard Deviation:", std_dev_area))
+print(paste("Bedrooms Standard Deviation:", std_dev_bedrooms))
+print(paste("Bathrooms Standard Deviation:", std_dev_bathrooms))
+print(paste("Stories Standard Deviation:", std_dev_stories))
+print(paste("Parking Standard Deviation:", std_dev_parking))
+

@@ -1,5 +1,56 @@
+---
+title: "Housing Prices Prediction"
+author: "Trevor Okinda"
+date: "2024"
+output:
+  github_document: 
+    toc: yes
+    toc_depth: 4
+    fig_width: 6
+    fig_height: 4
+    df_print: default
+editor_options:
+  chunk_output_type: console
+---
+
+# Student Details
+
+|                                              |     |
+|----------------------------------------------|-----|
+| **Student ID Number**                        | 134780 |
+| **Student Name**                             | Trevor Okinda |
+| **BBIT 4.2 Group**                           | C |
+| **Project Name**                             | Housing Prices Prediction |
+
+# Setup Chunk
+
+**Note:** the following KnitR options have been set as the global defaults: <BR> `knitr::opts_chunk$set(echo = TRUE, warning = FALSE, eval = TRUE, collapse = FALSE, tidy = TRUE)`.
+
+More KnitR options are documented here <https://bookdown.org/yihui/rmarkdown-cookbook/chunk-options.html> and here <https://yihui.org/knitr/options/>.
+
+```{r setup, include=FALSE}
+library(formatR)
+knitr::opts_chunk$set(
+  warning = FALSE,
+  collapse = FALSE
+)
+```
+
+### Source: 
+
+The dataset that was used can be downloaded here: *\<https://www.kaggle.com/datasets/yasserh/housing-prices-dataset\>*
+
+### Reference:
+
+*\<Harrison, D., & Rubinfeld, D. L. (1978). Hedonic prices and the demand for clean air. Journal of Environmental Economics and Management, 5(1), 81–102.
+Belsley, D. A., Kuh, E., & Welsch, R. E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. New York: Wiley\>\
+Refer to the APA 7th edition manual for rules on how to cite datasets: <https://apastyle.apa.org/style-grammar-guidelines/references/examples/data-set-references>*
+
+# Exploratory Data Analysis
+## Load dataset
+```{r load dataset}
 # Load dataset
-housing_data <- read.csv("data/Housing.csv", colClasses = c(
+housing_data <- read.csv("Housing.csv", colClasses = c(
   price = "numeric",
   area = "integer",
   bedrooms = "numeric",
@@ -23,7 +74,10 @@ head(housing_data)
 
 # View the dataset in a separate viewer window
 View(housing_data)
+```
 
+## Measures of Frequency
+```{r Measures of Frequency}
 # Measures of frequency for categorical variables
 table_mainroad <- table(housing_data$mainroad)
 table_guestroom <- table(housing_data$guestroom)
@@ -54,7 +108,10 @@ print(table_prefarea)
 
 print("Frequency of Furnishing Status:")
 print(table_furnishingstatus)
+```
 
+## Measures of Central Tendency
+```{r MOCT}
 # Measures of central tendency for numerical variables
 mean_price <- mean(housing_data$price)
 median_price <- median(housing_data$price)
@@ -83,7 +140,10 @@ print(paste("Mean Stories:", mean_stories))
 print(paste("Median Stories:", median_stories))
 print(paste("Mean Parking:", mean_parking))
 print(paste("Median Parking:", median_parking))
+```
 
+## Measures of Distribution
+```{r MOD}
 # Measures of distribution for numerical variables
 range_price <- range(housing_data$price)
 range_area <- range(housing_data$area)
@@ -128,22 +188,32 @@ print(paste("Bedrooms Standard Deviation:", std_dev_bedrooms))
 print(paste("Bathrooms Standard Deviation:", std_dev_bathrooms))
 print(paste("Stories Standard Deviation:", std_dev_stories))
 print(paste("Parking Standard Deviation:", std_dev_parking))
+```
 
+## Measures of Relationship
+```{r MOR}
 # Compute correlation coefficients
 correlation_matrix <- cor(housing_data[c("price", "area", "bedrooms", "bathrooms", "stories", "parking")])
 
 # Display correlation matrix
 print("Correlation Matrix:")
 print(correlation_matrix)
+```
 
+## ANOVA
+```{r ANOVA}
 # Perform ANOVA
 anova_result <- aov(price ~ furnishingstatus, data = housing_data)
 
 # Summarize ANOVA results
 summary(anova_result)
+```
 
+## Plots
+```{r Plots}
 # Load necessary library
 library(ggplot2)
+library(reshape2)
 
 # Histogram for price
 ggplot(housing_data, aes(x = price)) +
@@ -191,8 +261,6 @@ ggplot(housing_data, aes(x = area, y = price)) +
 pair_data <- housing_data[, c("price", "area", "bedrooms", "bathrooms", "stories", "parking")]
 pairs(pair_data)
 
-install.packages("reshape2")
-library(reshape2)
 # Heatmap for correlation matrix
 correlation_matrix <- cor(housing_data[c("price", "area", "bedrooms", "bathrooms", "stories", "parking")])
 ggplot(data = melt(correlation_matrix), aes(x = Var1, y = Var2, fill = value)) +
@@ -200,3 +268,5 @@ ggplot(data = melt(correlation_matrix), aes(x = Var1, y = Var2, fill = value)) +
   scale_fill_gradient(low = "white", high = "blue") +
   labs(title = "Correlation Heatmap", x = "", y = "") +
   theme_minimal()
+```
+
